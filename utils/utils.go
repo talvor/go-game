@@ -2,8 +2,9 @@ package utils
 
 import "path/filepath"
 
-func GetAssetsDirectory(assetType string) string {
-	assetDir, err := filepath.Abs(filepath.Join("assets", assetType))
+func GetAssetsDirectory(pathSegments ...string) string {
+	segments := append([]string{"assets"}, pathSegments...)
+	assetDir, err := filepath.Abs(filepath.Join(segments...))
 	if err != nil {
 		panic(err)
 	}

@@ -14,14 +14,21 @@ type Game struct {
 }
 
 func NewGame() *Game {
-	animationsDir := utils.GetAssetsDirectory("animations")
-	tilesetsDir := utils.GetAssetsDirectory("tilesets")
+	animationRenderer := tiled.NewAnimationRenderer([]string{
+		utils.GetAssetsDirectory("animations"),
+	}, []string{
+		utils.GetAssetsDirectory("tilesets", "Player"),
+	})
 
-	animationRenderer := tiled.NewAnimationRenderer([]string{animationsDir}, []string{tilesetsDir})
+	mapRenderer := tiled.NewMapRenderer([]string{
+		utils.GetAssetsDirectory("maps"),
+	}, []string{
+		utils.GetAssetsDirectory("tilesets", "Tiles"),
+	})
 
 	player := entities.NewPlayer(16, 16, animationRenderer)
 	sceneMap := map[scenes.SceneID]scenes.Scene{
-		scenes.GameSceneID:  scenes.NewGameScene(animationRenderer, player),
+		scenes.GameSceneID:  scenes.NewGameScene(animationRenderer, mapRenderer, player),
 		scenes.StartSceneID: scenes.NewStartScene(),
 		scenes.PauseSceneID: scenes.NewPauseScene(),
 	}

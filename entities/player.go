@@ -63,21 +63,26 @@ func (p *Player) Update() {
 	p.DX = 0.0
 	p.DY = 0.0
 
-	p.Action = "walk"
+	p.Action = "idle"
 	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 		p.DX = -2
 		p.Direction = "left"
-	} else if ebiten.IsKeyPressed(ebiten.KeyRight) {
+		p.Action = "walk"
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyRight) {
 		p.DX = 2
 		p.Direction = "right"
-	} else if ebiten.IsKeyPressed(ebiten.KeyUp) {
+		p.Action = "walk"
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyUp) {
 		p.DY = -2
 		p.Direction = "up"
-	} else if ebiten.IsKeyPressed(ebiten.KeyDown) {
+		p.Action = "walk"
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyDown) {
 		p.DY = 2
 		p.Direction = "down"
-	} else {
-		p.Action = "idle"
+		p.Action = "walk"
 	}
 
 	p.X += p.DX

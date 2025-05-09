@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/talvor/go-rpg/entities"
 	"github.com/talvor/go-rpg/scenes"
 	"github.com/talvor/go-rpg/utils"
 	"github.com/talvor/tiled"
@@ -18,8 +19,9 @@ func NewGame() *Game {
 
 	animationRenderer := tiled.NewAnimationRenderer([]string{animationsDir}, []string{tilesetsDir})
 
+	player := entities.NewPlayer(16, 16, animationRenderer)
 	sceneMap := map[scenes.SceneID]scenes.Scene{
-		scenes.GameSceneID:  scenes.NewGameScene(animationRenderer),
+		scenes.GameSceneID:  scenes.NewGameScene(animationRenderer, player),
 		scenes.StartSceneID: scenes.NewStartScene(),
 		scenes.PauseSceneID: scenes.NewPauseScene(),
 	}
@@ -56,5 +58,5 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 320, 240
+	return 640, 480
 }

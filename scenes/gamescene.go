@@ -1,47 +1,34 @@
 package scenes
 
 import (
-	"fmt"
 	"image/color"
-	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
+	"github.com/talvor/go-rpg/entities"
 	anir "github.com/talvor/tiled/animation/renderer"
-	"github.com/talvor/tiled/common"
 )
 
 type GameScene struct {
 	AnimationRenderer *anir.Renderer
 	loaded            bool
 	direction         string
+	player            *entities.Player
 }
 
-func NewGameScene(animationRenderer *anir.Renderer) *GameScene {
+func NewGameScene(animationRenderer *anir.Renderer, player *entities.Player) *GameScene {
 	return &GameScene{
 		AnimationRenderer: animationRenderer,
 		loaded:            false,
 		direction:         "right",
+		player:            player,
 	}
 }
 
 func (s *GameScene) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{120, 180, 255, 255})
-
-	op := &ebiten.DrawImageOptions{}
-
-	op.GeoM.Translate(16, 16)
-
-	opts := &common.DrawOptions{
-		Screen: screen,
-		Op:     op,
-	}
-
-	err := s.AnimationRenderer.Draw("Player", fmt.Sprintf("walk_%s", s.direction), opts)
-	if err != nil {
-		log.Println("Error drawing animation:", err)
-	}
+	s.player.Draw(screen)
 }
 
 func (s *GameScene) FirstLoad() {
@@ -66,18 +53,7 @@ func (s *GameScene) Update() SceneID {
 		return PauseSceneID
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		s.direction = "left"
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		s.direction = "right"
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyUp) {
-		s.direction = "up"
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyDown) {
-		s.direction = "down"
-	}
+	s.player.Update()
 
 	return GameSceneID
 }

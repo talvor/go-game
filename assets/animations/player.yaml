@@ -1,6 +1,6 @@
 ---
 tileset_groups:
-  - name: Player
+  - name: Player_Running
     tilesets:
       - Player_Base_Running
       - Shoes_Brown_Running
@@ -8,11 +8,19 @@ tileset_groups:
       - Pants_Blue_Running
       - Medium_Hair_Brown_Running
       - Hands_Bare_Running
+  - name: Player_Idle
+    tilesets:
+      - Player_Base_Idle
+      - Shoes_Brown_Idle
+      - Shirt_Green_Idle
+      - Pants_Blue_Idle
+      - Medium_Hair_Brown_Idle
+      - Hands_Bare_Idle
 
 animations:
   - class: Player
     action: walk_down
-    tileset_group: Player
+    tileset_group: Player_Running
     simple:
       duration: 600
       defaults:
@@ -22,7 +30,7 @@ animations:
 
   - class: Player
     action: walk_left
-    tileset_group: Player
+    tileset_group: Player_Running
     simple:
       duration: 600
       defaults:
@@ -32,7 +40,7 @@ animations:
 
   - class: Player
     action: walk_right
-    tileset_group: Player
+    tileset_group: Player_Running
     simple:
       duration: 600
       defaults:
@@ -42,7 +50,47 @@ animations:
 
   - class: Player
     action: walk_up
-    tileset_group: Player
+    tileset_group: Player_Running
+    simple:
+      duration: 600
+      defaults:
+        flip_horizontal: true
+        flip_vertical: false
+      frames: [12, 13, 14, 15, 16, 17]
+
+  - class: Player
+    action: idle_down
+    tileset_group: Player_Idle
+    simple:
+      duration: 600
+      defaults:
+        flip_horizontal: false
+        flip_vertical: false
+      frames: [0, 1, 2, 3, 4, 5]
+
+  - class: Player
+    action: idle_left
+    tileset_group: Player_Idle
+    simple:
+      duration: 600
+      defaults:
+        flip_horizontal: true
+        flip_vertical: false
+      frames: [6, 7, 8, 9, 10, 11]
+
+  - class: Player
+    action: idle_right
+    tileset_group: Player_Idle
+    simple:
+      duration: 600
+      defaults:
+        flip_horizontal: false
+        flip_vertical: false
+      frames: [6, 7, 8, 9, 10, 11]
+
+  - class: Player
+    action: idle_up
+    tileset_group: Player_Idle
     simple:
       duration: 600
       defaults:

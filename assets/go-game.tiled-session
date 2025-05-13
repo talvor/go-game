@@ -23,6 +23,10 @@
                 "y": 480.58608058608064
             }
         },
+        "tilesets/Tiles/Bridge_Wood.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tilesets/Tiles/FarmLand_Tile.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
@@ -49,9 +53,10 @@
     ],
     "project": "go-game.tiled-project",
     "recentFiles": [
+        "tilesets/Tiles/Path_Middle.tsx",
+        "tilesets/Tiles/Bridge_Wood.tsx",
         "maps/gamescene.tmx",
         "tilesets/Tiles/FarmLand_Tile.tsx",
-        "tilesets/Tiles/Path_Middle.tsx",
         "tilesets/Tiles/Grass_1_Middle.tsx",
         "tilesets/Tiles/Grass_Tiles_1.tsx",
         "maps/game.tmx"
